@@ -1,39 +1,7 @@
 <?php
-	require __DIR__ . '/vendor/autoload.php';
 
-	use Twig\Environment;
-	use Twig\Loader\FilesystemLoader;
-	
-	$loader = new FilesystemLoader(__DIR__ . '/templates');
-	$twig = new Environment($loader);
-	
-	session_start();
+	include("connect.php");
 
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
-	require __DIR__ . '/vendor/autoload.php';
-	define("IN_INDEX", 1);
-
-    include("config.inc.php");
-
-    if (isset($config) && is_array($config)) {
-
-        try {
-            $dbh = new PDO('mysql:host=' . $config['db_host'] . ';dbname=' . $config['db_name'] . ';charset=utf8mb4', $config['db_user'], $config['db_password']);
-            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            print "Nie mozna polaczyc sie z baza danych: " . $e->getMessage();
-            exit();
-        }
-
-    } 
-	else {
-        exit("Nie znaleziono konfiguracji bazy danych.");
-    }
-
-    include("functions.inc.php");
-
-	$date = date('Y-m-d');
 	$userFeedback = "";
 	$ile_photos = 0;
 	$last_post = 0;
@@ -74,13 +42,13 @@
 			$login = $_POST['login'];
 			$password = $_POST['password'];
 
-			$stmt = $dbh->prepare("SELECT * FROM a30_Users WHERE login = :login");
+			$stmt = $dbh->prepare("SELECT * FROM Users WHERE login = :login");
 			$stmt->execute([':login' => $login]);
 			$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 			if($user) {
 				if(password_verify($password, $user['password'])) {
-					$_SESSION['id'] = $user['id'];
+					$_SESSION['id'] = $user['idUser'];
 					$_SESSION['login'] = $user['login'];
 					$_SESSION['email'] = $user['email'];
 					$userFeedback = "";

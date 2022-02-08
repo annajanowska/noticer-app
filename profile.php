@@ -1,57 +1,24 @@
 <?php
 
-    require __DIR__ . '/vendor/autoload.php';
-
-    use Twig\Environment;
-    use Twig\Loader\FilesystemLoader;
-
-    $loader = new FilesystemLoader(__DIR__ . '/templates');
-    $twig = new Environment($loader);
-
-    session_start();
-
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
-    require __DIR__ . '/vendor/autoload.php';
-    define("IN_INDEX", 1);
-
-    include("config.inc.php");
-    include("functions.inc.php"); 
-   
-    $date = date('Y-m-d');
-    
-    if (isset($config) && is_array($config)) {
-
-        try {
-            $dbh = new PDO('mysql:host=' . $config['db_host'] . ';dbname=' . $config['db_name'] . ';charset=utf8mb4', $config['db_user'], $config['db_password']);
-            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            print "Nie mozna polaczyc sie z baza danych: " . $e->getMessage();
-            exit();
-        }
-
-    } else {
-        exit("Nie znaleziono konfiguracji bazy danych.");
-    }
-
+    include("connect.php");
 
     $url_name_profile = explode("/", $_SERVER['REQUEST_URI']);
 
     if(isset($_SESSION['id'])) {   
 
 
-        $stmt = $dbh->prepare("SELECT * FROM a30_Users WHERE login = :login");
+        $stmt = $dbh->prepare("SELECT * FROM Users WHERE login = :login");
         $stmt->execute([':login' =>$url_name_profile[2]]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (empty($user)) {
-            header("Location:https://s105.labagh.pl/main");
+            header("Location:https://s401354.labagh.pl/main");
             exit();
         }
         else {
-            $user_id = $user['id'];
+            $user_id = $user['idUser'];
 
-            $stmt = $dbh->prepare("SELECT * FROM a30_Users WHERE id = :id");
+            $stmt = $dbh->prepare("SELECT * FROM Users WHERE idUser = :id");
             $stmt->execute([':id' => $user_id]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -77,6 +44,6 @@
         }
     }
     else {
-        header("Location:https://s105.labagh.pl/main");
+        header("Location:https://s401354.labagh.pl/main");
         exit();
     }

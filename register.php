@@ -1,40 +1,9 @@
 <?php
 
-    require __DIR__ . '/vendor/autoload.php';
-
-    use Twig\Environment;
-    use Twig\Loader\FilesystemLoader;
-
-    $loader = new FilesystemLoader(__DIR__ . '/templates');
-    $twig = new Environment($loader);
-
-    session_start();
-
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
-    require __DIR__ . '/vendor/autoload.php';
-    define("IN_INDEX", 1);
-
-    include("config.inc.php");
-    include("functions.inc.php"); 
-
-    $date = date('Y-m-d');
-    
-    if (isset($config) && is_array($config)) {
-        try {
-            $dbh = new PDO('mysql:host=' . $config['db_host'] . ';dbname=' . $config['db_name'] . ';charset=utf8mb4', $config['db_user'], $config['db_password']);
-            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            print "Nie mozna polaczyc sie z baza danych: " . $e->getMessage();
-            exit();
-        }
-    }
-     else {
-        exit("Nie znaleziono konfiguracji bazy danych.");
-    }
+    include("connect.php");
     
     if(isset($_SESSION['id'])){
-        header("Location:https://s105.labagh.pl/main");
+        header("Location:https://s401354.labagh.pl/main");
         exit();
     }
     else {
@@ -63,8 +32,8 @@
            {
                 $hash_password_1 = password_hash($new_password_1, PASSWORD_DEFAULT);  
                 try {
-                    $stmt = $dbh->prepare ("INSERT INTO a30_Users (
-                    id, login, password, email) 
+                    $stmt = $dbh->prepare ("INSERT INTO Users (
+                    idUser, login, password, email) 
                     VALUES (
                         null, :login, :password, :email) 
                     ");

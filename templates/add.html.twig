@@ -30,18 +30,40 @@
 						</div>
 						<div class="form-gruop row my-2 mx-3">	
 							<label>Wybierz kategorię </label>
-							<select class="col-12 form-control" type="text" name="category" placeholder="Kategoria">
+							<select class="col-12 form-control" type="text" name="category" id= "slct1" placeholder="Kategoria" onchange="getSubcategory(this.id, 'slct2')">
+								<option></option>
 							 {% for name in categoriesNames %}
-							 	<option>{{name.name}}</option>
+							 	<option value="{{name.categoryName}}">{{name.categoryName}}</option>
 							 {% endfor %}
 							</select>
+							<script>
+							function getSubcategory (s1, s2) 
+							{
+								var selectedValue = document.getElementById("slct1").value;
+								console.log("Wybrana wartość to: ");
+								console.log(selectedValue);
+							
+								var s1 = document.getElementById(s1);
+								var s2 = document.getElementById(s2);
+
+								console.log("To jest s1:" );
+								console.log(s1);
+
+								console.log("To jest s2: ");
+								console.log(s2);
+
+								console.log("To jest wartości selected Value: ");
+								console.log(selectedValue);
+
+							}
+							</script>
 						</div>
 						<div class="form-gruop row my-2 mx-3">	
 							<label>Wybierz podkategorię (nieobowiązkowe)</label>
-							<select class="col-12 form-control" type="text" name="subcategory" placeholder="Podkategoria">
- 							 <option>Opcja 1</option>
+							<select class="col-12 form-control" type="text" id="slct2" name="subcategory" placeholder="Podkategoria">
+ 							 <!--<option>Opcja 1</option>
   							 <option>Opcja 2</option>
- 							 <option>Opcja 3</option>
+ 							 <option>Opcja 3</option>-->
 							</select>
 						</div>
 						<div class="form-gruop row my-2 mx-3">

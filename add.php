@@ -75,6 +75,6 @@
     }       
    }
    else {
-        header("Location:https://s105.labagh.pl/main");
+        header("Location:https://s401354.labagh.pl/main");
         exit();
    }

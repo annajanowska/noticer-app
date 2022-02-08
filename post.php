@@ -101,6 +101,6 @@
         echo $twig->render('post.html.twig', ['data' => $date, 'post' => $_POST, 'get' => $_GET, 'session' => $_SESSION, 'post' => $post, 'user' => $user, 'how_many_photos' => $how_many_photos, 'last_post' => $last_post, 'likes' => $likes, 'tab_comments' => $tab_comments]);
     }
     else {
-        header("Location:https://s105.labagh.pl/main");
+        header("Location:https://s401354.labagh.pl/main");
         exit();
     }

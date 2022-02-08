@@ -3,7 +3,7 @@
     include("connect.php");
     
     if(isset($_SESSION['id'])){
-        header("Location:https://s105.labagh.pl/main");
+        header("Location:https://s401354.labagh.pl/main");
         exit();
     }
     else {
@@ -32,8 +32,8 @@
            {
                 $hash_password_1 = password_hash($new_password_1, PASSWORD_DEFAULT);  
                 try {
-                    $stmt = $dbh->prepare ("INSERT INTO a30_Users (
-                    id, login, password, email) 
+                    $stmt = $dbh->prepare ("INSERT INTO Users (
+                    idUser, login, password, email) 
                     VALUES (
                         null, :login, :password, :email) 
                     ");

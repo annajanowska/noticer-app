@@ -7,18 +7,18 @@
     if(isset($_SESSION['id'])) {   
 
 
-        $stmt = $dbh->prepare("SELECT * FROM a30_Users WHERE login = :login");
+        $stmt = $dbh->prepare("SELECT * FROM Users WHERE login = :login");
         $stmt->execute([':login' =>$url_name_profile[2]]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (empty($user)) {
-            header("Location:https://s105.labagh.pl/main");
+            header("Location:https://s401354.labagh.pl/main");
             exit();
         }
         else {
-            $user_id = $user['id'];
+            $user_id = $user['idUser'];
 
-            $stmt = $dbh->prepare("SELECT * FROM a30_Users WHERE id = :id");
+            $stmt = $dbh->prepare("SELECT * FROM Users WHERE idUser = :id");
             $stmt->execute([':id' => $user_id]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -44,6 +44,6 @@
         }
     }
     else {
-        header("Location:https://s105.labagh.pl/main");
+        header("Location:https://s401354.labagh.pl/main");
         exit();
     }

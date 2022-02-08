@@ -21,13 +21,13 @@
 			$login = $_POST['login'];
 			$password = $_POST['password'];
 
-			$stmt = $dbh->prepare("SELECT * FROM a30_Users WHERE login = :login");
+			$stmt = $dbh->prepare("SELECT * FROM Users WHERE login = :login");
 			$stmt->execute([':login' => $login]);
 			$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 			if($user) {
 				if(password_verify($password, $user['password'])) {
-					$_SESSION['id'] = $user['id'];
+					$_SESSION['id'] = $user['idUser'];
 					$_SESSION['login'] = $user['login'];
 					$_SESSION['email'] = $user['email'];
 					$userFeedback = "";

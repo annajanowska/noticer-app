@@ -37,7 +37,7 @@
 
     //print_R($_SERVER['REQUEST_URI']);
     $postid = explode("/", $_SERVER['REQUEST_URI']);
-    print_R($postid[3]);
+    //print_R($postid[3]);
 
     if(isset($_SESSION['id'])){
     if (isset($_GET['show']) && intval($_GET['show']) > 0) {
@@ -52,8 +52,8 @@
         $stmt->execute([':postid' => $postid[3]]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        print_R($user);
-        print_R($user['login']);
+        //print_R($user);
+        //print_R($user['login']);
         $stmt = $dbh->prepare("SELECT COUNT(*) FROM a30_Post p INNER JOIN a30_Users u ON p.userID = u.id WHERE u.id = :userid");
         $stmt->execute([':userid' => $user['id']]);
         $how_many_photos = intval($stmt->fetchColumn());

@@ -9,13 +9,19 @@
     $resultObj = new stdClass;
     if(!empty($_POST['nameCat'])){
         $catName = $_POST['nameCat'];
+        $name = [];
 
         $stmt = $dbh->prepare("SELECT subcategoryName FROM Categories WHERE categoryName= '$catName' ");
             $stmt->execute();
-            $name = $stmt->fetch(PDO::FETCH_ASSOC);
+            while ($row_1 = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $name[] = $row_1;
+            }
+            $row['subcategoryName'] = $name;
+
         if(!empty($name))
         {
-            $resultObj->subCategoryName = $name['subcategoryName'];
+            // $resultObj->name = $name;
+            $resultObj->subCategoryName[] = $name;
             $resultObj->post = $_POST;
             $resultObj->isError = false;
             $resultJSON = json_encode($resultObj);

@@ -5,7 +5,7 @@
    if(isset($_SESSION['id'])){
 
     $categoriesNames = [];
-    $stmt = $dbh->prepare("SELECT categoryName FROM Categories");
+    $stmt = $dbh->prepare("SELECT DISTINCT categoryName FROM Categories");
     $stmt->execute();
     $test = "test";
 
@@ -14,7 +14,7 @@
     }
     //print_r($categoriesNames);
 
-   print_r($_POST['nameCat']);
+   // print_r($_POST['nameCat']);
    /* if ($_POST['nameCat']) {
         $query = "SELECT subcategoryName FROM Categories WHERE categoryName=".$_POST['nameCat'];
         $result = $db=>query($query);

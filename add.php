@@ -3,9 +3,20 @@
     include("connect.php");
     
    if(isset($_SESSION['id'])){
+
+    $categoriesNames = [];
+    $stmt = $dbh->prepare("SELECT name FROM Categories WHERE subIdCategory IS NULL");
+    $stmt->execute();
+    $test = "test";
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $categoriesNames[] = $row;
+    }
+    print_r($categoriesNames);
+
     if(empty($_POST))
     {
-        echo $twig->render('add.html.twig',['session' => $_SESSION, 'data' => $date]);
+        echo $twig->render('add.html.twig',['session' => $_SESSION, 'data' => $date, 'categoriesNames' => $categoriesNames]);
     }
     else {    
         try {
@@ -43,6 +54,10 @@
                 throw new Exception('Error in moving the uploaded file');
         
             $localization = $_POST['localization'];
+            $title = $_POST['title'];
+            $price = $_POST['price'];
+            $category = $_POST['category'];
+            $subcategory = $_POST['subcategory'];
             $description = $_POST['description'];
             $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';
             $domain = $protocol . $_SERVER['SERVER_NAME'];
@@ -50,27 +65,27 @@
             $currentDate = date("Y-m-d H:i:s");
            
 
-            $stmt = $dbh->prepare("SELECT * FROM a30_Users WHERE id = :id");
+            $stmt = $dbh->prepare("SELECT * FROM Users WHERE idUser = :id");
             $stmt->execute([':id' => $_SESSION['id']]);
-            $userID = $stmt->fetch(PDO::FETCH_ASSOC)['id'];
+            $userID = $stmt->fetch(PDO::FETCH_ASSOC)['idUser'];
 
     
-            $stmt = $dbh -> prepare("INSERT INTO a30_Post (id, imgSource, createdTime, localization, description, userID ) 
+            $stmt = $dbh -> prepare("INSERT INTO Posts (idPost, title, description, createdTime, imgSource, localization, price, isSold, idUser, idCategory) 
                 VALUES (
-                null, '$url', '$currentDate', '$localization', '$description', $userID) 
+                null, '$title', '$description', '$currentDate', '$url', '$localization', $price, 0 , $userID, 1) 
                 ");
             $stmt = $stmt->execute();
             
             if ( true) {
                 $info = "Przesłano plik!";
-                echo $twig->render('add.html.twig', ['post' => $_POST, 'session' =>$_SESSION, 'get' => $_GET, 'test'=> $info, 'data' => $date]);
+                echo $twig->render('add.html.twig', ['post' => $_POST, 'session' =>$_SESSION, 'get' => $_GET, 'test'=> $info, 'data' => $date, 'categoriesNames' => $categoriesNames]);
                 
             } else 
                 throw new Exception('Error in saving into the database');
             
         } catch (Exception $e) {
             $info = "Plik nie został przesłany.";
-            echo $twig->render('add.html.twig', ['post' => $_POST, 'session' =>$_SESSION, 'get' => $_GET, 'test'=>$info, 'data' => $date]);
+            echo $twig->render('add.html.twig', ['post' => $_POST, 'session' =>$_SESSION, 'get' => $_GET, 'test'=>$info, 'data' => $date, 'categoriesNames' => $categoriesNames]);
         }
     }       
    }

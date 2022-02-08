@@ -31,14 +31,14 @@
 						<div class="form-gruop row my-2 mx-3">	
 							<label>Wybierz kategorię </label>
 							<select class="col-12 form-control" type="text" name="category" placeholder="Kategoria">
- 							 <option>Opcja 1</option>
-  							 <option>Opcja 2</option>
- 							 <option>Opcja 3</option>
+							 {% for name in categoriesNames %}
+							 	<option>{{name.name}}</option>
+							 {% endfor %}
 							</select>
 						</div>
 						<div class="form-gruop row my-2 mx-3">	
 							<label>Wybierz podkategorię (nieobowiązkowe)</label>
-							<select class="col-12 form-control" type="text" name="category" placeholder="Kategoria">
+							<select class="col-12 form-control" type="text" name="subcategory" placeholder="Podkategoria">
  							 <option>Opcja 1</option>
   							 <option>Opcja 2</option>
  							 <option>Opcja 3</option>

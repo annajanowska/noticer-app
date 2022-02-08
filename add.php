@@ -14,11 +14,22 @@
     }
     //print_r($categoriesNames);
 
+   print_r($_POST['nameCat']);
+   /* if ($_POST['nameCat']) {
+        $query = "SELECT subcategoryName FROM Categories WHERE categoryName=".$_POST['nameCat'];
+        $result = $db=>query($query);
+        if ($result->num_rows >0) {
+            while($row = $result->fetch_assoc()) {
+                print_r($row);
+            }
+        }
+    } */
+
     if(empty($_POST))
     {
         echo $twig->render('add.html.twig',['session' => $_SESSION, 'data' => $date, 'categoriesNames' => $categoriesNames]);
     }
-    else {    
+    else {          
         try {
             if (empty($_FILES['image'])) {
                 throw new Exception('Image file is missing');

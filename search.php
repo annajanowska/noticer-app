@@ -44,11 +44,11 @@
 
 	if (isset($_SESSION['id'])) {
 
-		$stmt = $dbh->prepare("SELECT COUNT(*) FROM a30_Post WHERE userID = :userID");
+		$stmt = $dbh->prepare("SELECT COUNT(*) FROM Posts WHERE idUser = :userID");
 		$stmt->execute([':userID' => $_SESSION['id']]);
 		$ile_photos = intval($stmt->fetchColumn());
 
-		$stmt = $dbh->prepare("SELECT * FROM a30_Post WHERE userid = :userid ORDER BY createdTime DESC LIMIT 1");
+		$stmt = $dbh->prepare("SELECT * FROM Posts WHERE idUser = :userid ORDER BY createdTime DESC LIMIT 1");
     	$stmt->execute([':userid' => $_SESSION['id']]);
     	$last_post = $stmt->fetch(PDO::FETCH_ASSOC);
 	}

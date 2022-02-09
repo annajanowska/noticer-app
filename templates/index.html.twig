@@ -11,7 +11,8 @@
 	<meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <style>
 		html {
             position: relative;
@@ -159,15 +160,23 @@
                         <div class="d-flex flex-row justify-content-between p-3">
 							<div>
 								<div>
-									<strong style="color: #96009e">Aktualne</strong>
+                                {% if post.isSold == 0 %}
+                                    <strong style="color: #96009e">Aktualne</strong>
+                                {% else %}
+                                    <strong style="color: #96009e">Nieaktualne</strong>
+                                {% endif %}
 								</div>
-							<strong style="font-size:120%">Tytuł</strong>
+							<strong style="font-size:120%">{{post.title}}</strong>
 							</div>
-                             <span class="font-weight-bold" style="color: black; font-size: 150%"> 0 zł</span>
+                             <span class="font-weight-bold" style="color: black; font-size: 150%"> {{post.price}} zł</span>
                         </div>
 						<div class="d-flex flex-column pb-3 pl-3">		
-							<p>Opis</p>				
-							<strong class="d-block">Lokalizacja</strong>							
+							<p>{{post.description}}</p>				
+							<strong class="d-block">{{post.localization}}</strong>							
+						</div>
+                        <div class="d-flex flex-column pb-3 pl-3">		
+                            <strong class="d-block">{{post.name.categoryName}}</strong>
+                            <strong class="d-block">{{post.name.subcategoryName}}</strong>										
 						</div>
                     </div>
                 </div>	

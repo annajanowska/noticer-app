@@ -7,7 +7,7 @@
     $categoriesNames = [];
     $stmt = $dbh->prepare("SELECT DISTINCT categoryName FROM Categories");
     $stmt->execute();
-    $test = "test";
+    //$test = "test";
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $categoriesNames[] = $row;
@@ -68,8 +68,8 @@
             $title = $_POST['title'];
             $price = $_POST['price'];
             $category = $_POST['category'];
-            print_r($_GET['category']);
-            $subcategory = $_POST['subcategory'];
+            print_r($category);
+            //$subcategory = $_POST['subcategory'];
             $description = $_POST['description'];
             $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';
             $domain = $protocol . $_SERVER['SERVER_NAME'];
@@ -80,11 +80,10 @@
             $stmt = $dbh->prepare("SELECT * FROM Users WHERE idUser = :id");
             $stmt->execute([':id' => $_SESSION['id']]);
             $userID = $stmt->fetch(PDO::FETCH_ASSOC)['idUser'];
-
     
             $stmt = $dbh -> prepare("INSERT INTO Posts (idPost, title, description, createdTime, imgSource, localization, price, isSold, idUser, idCategory) 
                 VALUES (
-                null, '$title', '$description', '$currentDate', '$url', '$localization', $price, 0 , $userID, 1) 
+                null, '$title', '$description', '$currentDate', '$url', '$localization', $price, 0 , $userID, (SELECT idCategory FROM Categories WHERE categoryName = '$category')) 
                 ");
             $stmt = $stmt->execute();
             

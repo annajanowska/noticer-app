@@ -30,8 +30,7 @@
 						</div>
 						<div class="form-gruop row my-2 mx-3">	
 							<label>Wybierz kategorię </label>
-							<select class="col-12 form-control" type="text" name="category" id= "slct1" placeholder="Kategoria" onchange="getSubcategory(this.id, 'slct2')">
-								<option></option>
+							<select class="col-12 form-control" type="text" name="category" id= "slct1" placeholder="Kategoria">
 							 {% for name in categoriesNames %}
 							 	<option value="{{name.categoryName}}">{{name.categoryName}}</option>
 							 {% endfor %}
@@ -39,6 +38,7 @@
 							<script>
 							function getSubcategory (s1, s2) 
 							{
+								//onchange="getSubcategory(this.id, 'slct2')
 								var selectedValue = document.getElementById("slct1").value;
 								console.log("Wybrana wartość to: ");
 								console.log(selectedValue);
@@ -64,6 +64,10 @@
 										console.log(data);
 										console.log("OTRZYMANE WARTOŚCI: ");
 										console.log(data.subCategoryName[0]);
+										for (var i = 0; i < data.subCategoryName[0].length; i++) {
+														echo '<option>' data.subcategory[0][i] '</option>';
+										}
+									
 									},
 									error(xhr, textStatus) {
 										console.log("Wystąpił błąd z połączeniem:", textStatus);
@@ -89,14 +93,6 @@
 								/*})
 							} */
 							</script>
-						</div>
-						<div class="form-gruop row my-2 mx-3">	
-							<label>Wybierz podkategorię (nieobowiązkowe)</label>
-							<select class="col-12 form-control" type="text" id="slct2" name="subcategory" placeholder="Podkategoria">
- 							 <!--<option>Opcja 1</option>
-  							 <option>Opcja 2</option>
- 							 <option>Opcja 3</option>-->
-							</select>
 						</div>
 						<div class="form-gruop row my-2 mx-3">
 							<label>Dodaj opis</label>

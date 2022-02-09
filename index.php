@@ -94,26 +94,31 @@
 	// 		}
 	// }
 	
-	// if (isset($_GET['comments']) && isset($_SESSION['id']) && isset($_POST['comment']) ) {
+	if (isset($_GET['message']) && isset($_SESSION['id']) && isset($_POST['message']) ) {
 
-	// 	$id = intval($_GET['comments']);
-	// 	$comment = $_POST['comment'];
+		$id = intval($_GET['message']);
+		$message = $_POST['message'];
+
+		$stmt_1 = $dbh->prepare("SELECT idUser FROM Posts WHERE idPost = $id");
+		$stmt_1->execute();
+		$idReceiver = intval($stmt_1->fetchColumn());
 		
-	// 	if (mb_strlen($comment) >= 2 && mb_strlen($comment) <= 200) {
-	// 		try {
-	// 			$stmt = $dbh->prepare ("INSERT INTO a30_User_Post_Comment (
-	// 			id, userID, postID, comment, createdTimeComment) 
-	// 			VALUES (
-	// 				null, :userID, :postID, :comment, '$currentDate') 
-	// 			");
-	
-	// 		$stmt->execute([':userID' => $_SESSION['id'], ':postID' => $id, ':comment'=> $comment]);
-	// 		} 
-	// 		catch (PDOException $e) {
-	// 		}
-	// 		header('Location: /main');
-	// 		exit();
-	// 	}	
-	// }
+		if (mb_strlen($message) >= 2 && mb_strlen($message) <= 200) {
+			try {
+				$stmt = $dbh->prepare ("INSERT INTO UserPostMessage (
+				idUserPostMessage, message, idUserSender, idUserReceiver, idPost, createdTimeMessage) 
+				VALUES (
+					null, :message, :idUserSender, :idUserReceiver, :postID , '$currentDate') 
+				");
+
+			$stmt->execute([':message' => $message, ':idUserSender' => $_SESSION['id'], ':idUserReceiver' => $idReceiver, ':postID' => $id]);
+			} 
+			catch (PDOException $e) {
+			}
+			header('Location: /main');
+			print_r("powrót");
+			exit();
+		}	
+	}
 
 	echo $twig->render('index.html.twig', ['data' => $date, 'session' => $_SESSION, 'test' => $userFeedback, 'posts' => $posts, 'ile_photos' => $ile_photos, 'last_post' => $last_post, 'comment'=> $comment]);

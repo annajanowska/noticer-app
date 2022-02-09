@@ -30,19 +30,15 @@
 						</div>
 						<div class="form-gruop row my-2 mx-3">	
 							<label>Wybierz kategorię </label>
-							<select class="col-12 form-control" type="text" name="category" id= "slct1" placeholder="Kategoria" onchange="getSubcategory(this.id, 'slct2')">
-								<option></option>
+							<select class="col-12 form-control" type="text" name="category" id= "slct1" placeholder="Kategoria">
 							 {% for name in categoriesNames %}
 							 	<option value="{{name.categoryName}}">{{name.categoryName}}</option>
 							 {% endfor %}
 							</select>
-							<div class="form-gruop row my-2 mx-3">	
-							<label>Wybierz podkategorię (nieobowiązkowe)</label>
-									<select class="col-12 form-control" type="text" id="slct2" name="subcategory" placeholder="Podkategoria">
-									</select>
 							<script>
 							function getSubcategory (s1, s2) 
 							{
+								//onchange="getSubcategory(this.id, 'slct2')
 								var selectedValue = document.getElementById("slct1").value;
 								console.log("Wybrana wartość to: ");
 								console.log(selectedValue);
@@ -97,7 +93,6 @@
 								/*})
 							} */
 							</script>
-							</div>
 						</div>
 						<div class="form-gruop row my-2 mx-3">
 							<label>Dodaj opis</label>

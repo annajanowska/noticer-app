@@ -13,7 +13,7 @@
 	$stmt->execute();
 
 	while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-		$stmt_1 = $dbh->prepare("SELECT categoryName, subcategoryName FROM Categories WHERE idCategory = :idCategory");
+		$stmt_1 = $dbh->prepare("SELECT categoryName FROM Categories WHERE idCategory = :idCategory");
 		$stmt_1->execute([':idCategory' => $row['idCategory']]);
 		$row['name'] = $stmt_1->fetch(PDO::FETCH_ASSOC);
         $posts[] = $row;

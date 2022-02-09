@@ -24,16 +24,23 @@
                         </div>
                         <div class="d-flex flex-row justify-content-between p-3">	
 						<div>
-								<div>
-									<strong style="color: #96009e">Aktualne</strong>
-								</div>
-							<strong style="font-size:120%">Tytuł</strong>
+							<div>
+								{% if post.isSold == 0 %}
+                                    <strong style="color: #96009e">Aktualne</strong>
+                                {% else %}
+                                    <strong style="color: #96009e">Nieaktualne</strong>
+                                {% endif %}
 							</div>
-                             <span class="font-weight-bold" style="color: black; font-size: 150%"> 0 zł</span>
+							<strong style="font-size:120%">{{post.title}}</strong>
+							</div>
+                             <span class="font-weight-bold" style="color: black; font-size: 150%"> {{post.price}} zł</span>
                         </div>
 						<div class="d-flex flex-column pb-3 pl-3">		
-							<p>Opis</p>				
-							<strong class="d-block">Lokalizacja</strong>							
+							<p>{{post.description}}</p>				
+							<strong class="d-block">{{post.localization}}</strong>							
+						</div>
+                        <div class="d-flex flex-column pb-3 pl-3">		
+                            <strong class="d-block">{{post.name.categoryName}}</strong>									
 						</div>				
                     </div>
                 </div>	

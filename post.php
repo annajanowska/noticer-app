@@ -13,25 +13,30 @@
 
         $id = intval($_GET['show']);
 
-        $stmt = $dbh->prepare("SELECT * FROM a30_Post WHERE id = :id");
+        $stmt = $dbh->prepare("SELECT * FROM Posts WHERE idUser = :id");
         $stmt->execute([':id' => $id]);
         $post = $stmt->fetch(PDO::FETCH_ASSOC);
 	
-        $stmt = $dbh->prepare("SELECT u.* FROM a30_Post p INNER JOIN a30_Users u ON p.userID = u.id WHERE p.id = :postid");
+        $stmt = $dbh->prepare("SELECT u.* FROM Posts p INNER JOIN Users u ON p.idUser = u.idUser WHERE p.idPost = :postid");
         $stmt->execute([':postid' => $postid[3]]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        //print_R($user);
-        //print_R($user['login']);
-        $stmt = $dbh->prepare("SELECT COUNT(*) FROM a30_Post p INNER JOIN a30_Users u ON p.userID = u.id WHERE u.id = :userid");
-        $stmt->execute([':userid' => $user['id']]);
-        $how_many_photos = intval($stmt->fetchColumn());
-
-        $stmt = $dbh->prepare("SELECT * FROM a30_Post p INNER JOIN a30_Users u ON p.userID = u.id WHERE u.id = :userid ORDER BY createdTime DESC LIMIT 1");
-        $stmt->execute([':userid' => $user['id']]);
+        $stmt = $dbh->prepare("SELECT * FROM Posts WHERE idUser = :idUser ORDER BY createdTime DESC LIMIT 1");
+        $stmt->execute([':idUser' => $user['idUser']]);
         $last_post = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $stmt = $dbh->prepare("SELECT COUNT(*) FROM a30_User_Post_Like WHERE PostID = :PostID");
+        //print_R($user);
+        //print_R($user['login']);
+        $stmt = $dbh->prepare("SELECT COUNT(*) FROM Posts p INNER JOIN Users u ON p.idUser = u.idUser WHERE u.idUser = :userid");
+        $stmt->execute([':userid' => $user['idUser']]);
+        $how_many_photos = intval($stmt->fetchColumn());
+
+        $stmt = $dbh->prepare("SELECT * FROM Posts p INNER JOIN Users u ON p.idUser = u.idUser WHERE u.idUser = :userid ORDER BY createdTime DESC LIMIT 1");
+        $stmt->execute([':userid' => $user['idUser']]);
+        $currentPost = $stmt->fetch(PDO::FETCH_ASSOC);
+        // print_r($last_post['imgSource']);
+
+       /* $stmt = $dbh->prepare("SELECT COUNT(*) FROM a30_User_Post_Like WHERE PostID = :PostID");
 		$stmt->execute([':PostID' => $id]);
         $likes = intval($stmt->fetchColumn());
 
@@ -41,7 +46,7 @@
 		$stmt->execute([':PostID' => $id]);
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			$tab_comments[] = $row;
-		}
+		}*/
     }
     else {       
 
@@ -98,7 +103,7 @@
              }
             }
         }
-        echo $twig->render('post.html.twig', ['data' => $date, 'post' => $_POST, 'get' => $_GET, 'session' => $_SESSION, 'post' => $post, 'user' => $user, 'how_many_photos' => $how_many_photos, 'last_post' => $last_post, 'likes' => $likes, 'tab_comments' => $tab_comments]);
+        echo $twig->render('post.html.twig', ['data' => $date, 'post' => $_POST, 'get' => $_GET, 'session' => $_SESSION, 'post' => $post, 'user' => $user, 'how_many_photos' => $how_many_photos, 'currentPost' => $currentPost, 'last_post' => $last_post, 'likes' => $likes, 'tab_comments' => $tab_comments]);
     }
     else {
         header("Location:https://s401354.labagh.pl/main");

@@ -88,14 +88,14 @@
             $stmt = $stmt->execute();
             
             if ( true) {
-                $info = "Przesłano plik!";
+                $info = "Dodano ogłoszenie!";
                 echo $twig->render('add.html.twig', ['post' => $_POST, 'session' =>$_SESSION, 'get' => $_GET, 'test'=> $info, 'data' => $date, 'categoriesNames' => $categoriesNames]);
                 
             } else 
                 throw new Exception('Error in saving into the database');
             
         } catch (Exception $e) {
-            $info = "Plik nie został przesłany.";
+            $info = "Ogłoszenie nie zostało dodane - wprowadź poprawne dane.";
             echo $twig->render('add.html.twig', ['post' => $_POST, 'session' =>$_SESSION, 'get' => $_GET, 'test'=>$info, 'data' => $date, 'categoriesNames' => $categoriesNames]);
         }
     }       

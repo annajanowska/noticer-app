@@ -49,23 +49,18 @@
 					<strong class="d-block" style="font-size:120%">{{post.title}}</strong>
 					<p>{{post.description}}</p>
 					<strong class="d-block">{{post.localization}}</strong>	
-					<strong class="d-block">{{post.categoryName}}</strong>	
-					{% for comment in tab_comments %}
-						<div class="pb-2">
-							<strong class="d-block text-wrap">{{comment.login}}</strong>
-							<span>{{comment.comment}}</span>
-						</div>
-					{% endfor %}						
-					<form action= "/post.php?comments={{post.id}}" enctype="multipart/form-data" method="POST">
+					<strong class="d-block">{{post.categoryName}}</strong>							
+					<form action= "/post.php?message={{post.idPost}}" enctype="multipart/form-data" method="POST">
 					<div class="d-flex flex-row mt-2 mb-5">
 						<div>
-							<input class="form-control" type="text" name="comment" placeholder="Dodaj komentarz">
+							<input class="form-control" type="text" name="message" placeholder="Wyślij wiadomość do {{post.login}}">
 						</div>
 						<div class="pl-3">
 							<button type="submit" name="" class="btn btn-outline-primary">Dodaj</button>
 						</div>
 					</div>
 					</form>
+					<p>{{info}}</p>
 				</div>
 			</div>
 		</div>

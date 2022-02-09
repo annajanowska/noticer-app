@@ -12,7 +12,7 @@
         if (isset($_GET['show']) && intval($_GET['show']) > 0) {
     
             $id = intval($_GET['show']);
-    
+
             $stmt = $dbh->prepare("SELECT p.*, categoryName FROM Posts p INNER JOIN Categories c ON c.idCategory = p.idCategory WHERE idPost= :id");
             $stmt->execute([':id' => $id]);
             $post = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -46,9 +46,38 @@
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $tab_comments[] = $row;
             }*/
+            
+
         }
         else {       
     
+            if (isset($_GET['message']) && isset($_SESSION['id']) && isset($_POST['message']) ) {
+
+                $id = intval($_GET['message']);
+                $message = $_POST['message'];
+                
+                $stmt_1 = $dbh->prepare("SELECT idUser FROM Posts WHERE idPost = $id");
+                $stmt_1->execute();
+                $idReceiver = intval($stmt_1->fetchColumn());
+                print_r($idReceiver);
+                
+                if (mb_strlen($message) >= 2 && mb_strlen($message) <= 200) {
+                    try {
+                        $stmt = $dbh->prepare ("INSERT INTO UserPostMessage (
+                        idUserPostMessage, message, idUserSender, idUserReceiver, idPost, createdTimeMessage) 
+                        VALUES (
+                            null, :message, :idUserSender, :idUserReceiver, :postID , '$currentDate') 
+                        ");
+        
+                    $stmt->execute([':message' => $message, ':idUserSender' => $_SESSION['id'], ':idUserReceiver' => $idReceiver, ':postID' => $id]);
+                    } 
+                    catch (PDOException $e) {
+                    }
+                    header('Location: post/show/'.$id.'');
+                    print_r("powrót");
+                    exit();
+                }	
+            }
            /* if (isset($_GET['comments']) && isset($_SESSION['id']) && isset($_POST['comment'])) {
     
                 $id = intval($_GET['comments']);
@@ -101,8 +130,10 @@
                     exit();
                  }
                 } */
+
+
             }
-            echo $twig->render('post.html.twig', ['data' => $date, 'post' => $_POST, 'get' => $_GET, 'session' => $_SESSION, 'post' => $post, 'user' => $user, 'how_many_photos' => $how_many_photos, 'last_post' => $last_post, 'likes' => $likes, 'tab_comments' => $tab_comments]);
+            echo $twig->render('post.html.twig', ['data' => $date, 'post' => $_POST, 'get' => $_GET, 'session' => $_SESSION, 'post' => $post, 'user' => $user, 'how_many_photos' => $how_many_photos, 'last_post' => $last_post ]);
         }
         else {
             header("Location:https://s105.labagh.pl/main");

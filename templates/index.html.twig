@@ -13,6 +13,7 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
     <style>
 		html {
             position: relative;
@@ -100,7 +101,6 @@
         .photo-shadow:focus {
             box-shadow: inset 0 0 2px #bb90d1, 0 0 10px #bb90d1;
         }
-	
     </style>
 </head>
 
@@ -120,6 +120,9 @@
                     <div class="d-flex flex-row">
                         <ul class="list-inline m-0">
 						   	{% if session.id is defined %}
+                            <li class="list-inline-item ml-2">
+                                <a class="nav-link" href="/message">Wiadomości</a>
+                            </li>                               
                             <li class="list-inline-item ml-2">
                                 <a class="nav-link" href="/add">Dodaj ogłoszenie</a>
                             </li>

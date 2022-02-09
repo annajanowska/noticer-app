@@ -26,7 +26,7 @@
 		<div class="row justify-content-md-around mb-5">
 
 			<div class="col-2 mb-5">
-				<img src="{{post.imgSource}}"  class="card shadow-sm " style="height: 30rem; width: 30rem; object-fit: cover;">
+				<img src="{{currentPost.imgSource}}"  class="card shadow-sm " style="height: 30rem; width: 30rem; object-fit: cover;">
 			</div>
 			
 			<div class="col-auto">
@@ -34,7 +34,7 @@
 
 					<div class="d-flex justify-content-between align-items-center mb-3">
 						<div>
-							<a href="/post.php?like={{post.id}}">
+							<a href="/post.php?like={{currentPost.idPost}}">
 							<button class="btn p-0 mr-1 heart-shadow">
 							<svg width="1.6em" height="1.6em" viewBox="0 0 16 16"
 								class="bi bi-heart" fill="currentColor"
@@ -49,7 +49,7 @@
 						</div>
 					</div>
 					
-					<strong class="d-block" style="color: purple;">{{post.localization}}</strong>
+					<strong class="d-block" style="color: purple;">{{currentPost.localization}}</strong>
 					<p>{{post.description}}</p>
 					
 					{% for comment in tab_comments %}

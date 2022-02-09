@@ -19,6 +19,7 @@
     include("functions.inc.php");
 
 	$date = date('Y-m-d');
+    date_default_timezone_set('Europe/Warsaw');
 
     if (isset($config) && is_array($config)) {
         try {

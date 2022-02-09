@@ -32,12 +32,18 @@
         }
         .navbar-light .navbar-brand {
             color: purple;
+            //font-family: 'Times New Roman';
         }
         
         .navbar-light {
             background: rgb(82,190,209, 0.3) !important;
         }
         
+        .nav-link {
+            //font-family: 'Times New Roman';
+            color: #96009e;
+        }
+
         .search {
             background: rgb(251,246,255, 0.7);
         }
@@ -115,14 +121,14 @@
                         <ul class="list-inline m-0">
 						   	{% if session.id is defined %}
                             <li class="list-inline-item ml-2">
-                                <a class="nav-link" style="color: #96009e" href="/add">Dodaj ogłoszenie</a>
+                                <a class="nav-link" href="/add">Dodaj ogłoszenie</a>
                             </li>
                             <li class="list-inline-item ml-2">
-                                <a class="nav-link" style="color: #96009e" href="/profile/{{session.login}}">Twój Profil</a>
+                                <a class="nav-link" href="/profile/{{session.login}}">Twój Profil</a>
                             </li>                            	
                         	{% else %}
                             <li class="list-inline-item">
-                                <a class="nav-link" style="color: #96009e" href="/register">Rejestracja</a>
+                                <a class="nav-link" href="/register">Rejestracja</a>
                             </li>                            	
                         	{% endif %}
                         </ul>
@@ -177,6 +183,19 @@
                         <div class="d-flex flex-column pb-3 pl-3">		
                             <strong class="d-block">{{post.name.categoryName}}</strong>									
 						</div>
+                        {% if session.id is defined %}
+                            <form action= "/index.php?message={{post.idPost}}" enctype="multipart/form-data" method="POST">
+						    <div class="d-flex flex-row mr-3 mb-3">
+							    <div class="col-10">
+								    <input class="form-control" type="text" name="message" placeholder="Wyślij wiadomość do {{post.login}}">
+							    </div>
+							    <div class="col-2 pl-3">
+								    <button type="submit" name="" class="btn btn-outline-primary">Dodaj</button>
+                                    <div>{{info}}</div>
+							    </div>
+						    </div>
+                            </form>
+                        {% endif %}
                     </div>
                 </div>	
     		{% endfor %}

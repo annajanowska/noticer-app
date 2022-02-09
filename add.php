@@ -68,7 +68,7 @@
             $title = $_POST['title'];
             $price = $_POST['price'];
             $category = $_POST['category'];
-            print_r($category);
+            // print_r($category);
             //$subcategory = $_POST['subcategory'];
             $description = $_POST['description'];
             $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';

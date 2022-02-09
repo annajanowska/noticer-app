@@ -33,14 +33,19 @@
 				<div class="d-flex flex-column mb-3" style="width: 17rem;">
 
 					<div class="d-flex justify-content-between align-items-center mb-3">
-						<div>
+						{% if owner == "true" %}
+						<form action= "/post.php?delete={{post.idPost}}" enctype="multipart/form-data" method="POST">
+						<button type="submit" name="delete" class="btn btn-outline-primary">X</button>
+						</form>
+						{% endif %}
+						<span class="mx-1" style="color: black; font-size: 150%" >{{post.price}} zł</span>
 							<!--<a href="/post.php?like={{post.id}}">
 							<button></button>
 							</a>
-							<span class="mx-1">Liczba polubień: </span>-->
-							<span class="mx-1" style="color: black; font-size: 150%" >{{post.price}} zł</span>
+							<span class="mx-1">Liczba polubień: </span>-->						
 						</div>
 					</div>
+					
 						{% if post.isSold == 0 %}
                             <strong style="color: #96009e">Aktualne</strong>
                         {% else %}

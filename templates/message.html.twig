@@ -4,7 +4,6 @@
 
 {% block body %}
 
-
 <div class="container">
 	<div class="row">
 		<div class="col-6 mx-auto my-5">
@@ -13,32 +12,22 @@
                     Wiadomości
                 </div>
                 <div class="list-group">
-                    <a href="/conversation/cos" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Tytuł pierwszego wpisu</h5>
-                            <small>3 dni temu</small>
-                        </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Tytuł drugiego wpisu</h5>
-                            <small class="text-muted">4 dni temu</small>
-                        </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">Tytuł trzeciego wpisu</h5>
-                            <small class="text-muted">5 dni temu</small>
-                        </div>
-                        <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                    </a>
+                    {% for conversation in conversations %}
+                    {# "/index.php?message={{post.idPost}}"
+                    index.php?page=nazwa_strony&edit=id #}
+                    {# $url = "http://localhost/main.php?email=$email_address&event_id=$event_id"; #}
+                        <a href="/conversation.php?title={{conversation.postTitle}}&otherName={{conversation.otherUserName}}" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h5 class="mb-1">{{conversation.postTitle}}</h5>
+                                {# <small>{{conversation.otherUserName}}</small> #}
+                            </div>
+                            <p class="mb-1">{{conversation.otherUserName}}</p>
+                        </a>
+                    {% endfor %}
                 </div>
 		    </div>
 		</div>
 	</div>
 </div>
-
 
 {% endblock %}

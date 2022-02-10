@@ -9,6 +9,7 @@
             Wiadomości
         </div>
         <div class="card-body">
+        <div class="scroll">
             {% for message in messages %}
                 {% if session.id == message.idUserSender %}
                     <div class="bubbleWrapper">
@@ -33,6 +34,25 @@
                 {% endif %}
             {% endfor %}
         </div>
+        <div style="margin-top: 30px;">
+            <form action= "/conversation.php?message={{idOtherUser}}&post={{idPost}}" enctype="multipart/form-data" method="POST">
+				<div class="d-flex flex-row mr-3 mb-3">
+					<div class="col-10">
+						<input class="form-control" type="text" name="message" placeholder="Wyślij wiadomość do {{otherUserLogin}}">
+					</div>
+					<div class="col-2 pl-3">
+						<button type="submit" name="" class="btn btn-outline-primary">Dodaj</button>
+                        <div>{{info}}</div>
+				    </div>
+				</div>
+            </form>
+        </div>
+        </div>
     </div>
+
+    <script>
+        var chatDiv = document.getElementsByClassName('scroll')[0];
+        chatDiv.scrollTop = chatDiv.scrollHeight;
+    </script>
 
 {% endblock %}

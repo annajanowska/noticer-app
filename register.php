@@ -20,15 +20,15 @@
             if (isset($_POST['g-recaptcha-response'])) {
                 $gRecaptchaResponse = $_POST['g-recaptcha-response'];
             }
-		    //$recaptcha = new \ReCaptcha\ReCaptcha($config['recaptcha_private']);
-		    //$resp = $recaptcha->verify($gRecaptchaResponse);
+		    $recaptcha = new \ReCaptcha\ReCaptcha($config['recaptcha_private']);
+		    $resp = $recaptcha->verify($gRecaptchaResponse);
 
                 $username = $_POST['login'];
                 $new_email= $_POST['email'];
                 $new_password_1= ($_POST['new_password_1']);
                 $new_password_2 = ($_POST['new_password_2']);
-//$resp->isSuccess() && 
-           if(preg_match('/^[a-zA-Z0-9\-\_\.]+\@[a-zA-Z0-9\-\_\.]+\.[a-zA-Z]{2,5}$/D', $new_email) && preg_match('/^(?=.*[A-Za-z0-9]$)[A-Za-z][A-Za-z\d.-]{0,100}$/D', $username) && $_POST['new_password_1'] === $_POST['new_password_2'])
+                
+           if($resp->isSuccess() && preg_match('/^[a-zA-Z0-9\-\_\.]+\@[a-zA-Z0-9\-\_\.]+\.[a-zA-Z]{2,5}$/D', $new_email) && preg_match('/^(?=.*[A-Za-z0-9]$)[A-Za-z][A-Za-z\d.-]{0,100}$/D', $username) && $_POST['new_password_1'] === $_POST['new_password_2'])
            {
                 $hash_password_1 = password_hash($new_password_1, PASSWORD_DEFAULT);  
                 try {

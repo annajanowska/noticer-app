@@ -16,10 +16,11 @@
                     {# "/index.php?message={{post.idPost}}"
                     index.php?page=nazwa_strony&edit=id #}
                     {# $url = "http://localhost/main.php?email=$email_address&event_id=$event_id"; #}
-                        <a href="/conversation.php?title={{conversation.postTitle}}&otherName={{conversation.otherUserName}}" class="list-group-item list-group-item-action flex-column align-items-start">
+                    {# "/conversation.php?title={{conversation.postTitle}}&otherName={{conversation.otherUserName}}" #}
+                        <a href="/conversation.php?post={{conversation.idPost}}&person={{conversation.buyer}}" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">{{conversation.postTitle}}</h5>
-                                {# <small>{{conversation.otherUserName}}</small> #}
+                                <small>{{conversation.lastMsg}}</small>
                             </div>
                             <p class="mb-1">{{conversation.otherUserName}}</p>
                         </a>

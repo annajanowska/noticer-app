@@ -6,5 +6,5 @@ $config = [
     'db_user'     => 's401354',
     'db_password' => 'myhlj7jierjd'
 ];
-    $config['recaptcha_public'] = '6LcrreYUAAAAAGeERM9Etdv8wlh81RCSK0LXuwfX';
-    $config['recaptcha_private'] = '6LcrreYUAAAAALTdoToeer_H4NZ1ECK4U76g0huL';
+    $config['recaptcha_public'] = '6Lf6Vm4eAAAAAFIWNZf6cXN3O63xkxZqdMjVddkQ';
+    $config['recaptcha_private'] = '6Lf6Vm4eAAAAAK3clCAjVMxsUvkC57K2n_jLdjEr';

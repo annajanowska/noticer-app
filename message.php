@@ -25,18 +25,6 @@
             $stmt_2->execute([':idUser' => $row['buyer']]);
             $row['otherUserName'] = $stmt_2->fetchColumn();
 
-            // $stmt_1 = $dbh->prepare("SELECT login FROM Users WHERE idUser = :idUser");
-            // if ($_SESSION['id'] == intval($row['buyer'])) {
-            //     $stmt_1->execute([':idUser' => $row['idUserReceiver']]);
-            //     $idOtherUser = $row['idUserReceiver'] ;
-            // } else {
-            //     $stmt_1->execute([':idUser' => $row['buyer']]);
-            //     $idOtherUser = $row['idUserSender'];
-            // }
-
-            // $row['idOtherUser'] = $idOtherUser;
-            // $row['otherUserName'] = $stmt_1->fetchColumn();
-
             $conversations[] = $row;
         }
 

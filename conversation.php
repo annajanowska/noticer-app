@@ -43,9 +43,6 @@
                     catch (PDOException $e) {
                     }
 
-                    //header('Location: /conversation.php?post='$idPost'&person='$idReceiver'');
-                    //print_r("powrót");
-                    //exit();
                 }
         
                 $stmt_1 = $dbh->prepare("SELECT login FROM Users WHERE idUser = $idReceiver");
@@ -67,47 +64,7 @@
 
             }
         }
-        // elseif (isset($_GET['message']) && isset($_POST['message']) && isset($_GET['post'])) {
 
-        //     $idPost =intval($_GET['post']);
-        //     $idReceiver = intval($_GET['message']);
-        //     $message = $_POST['message'];
-                
-        //     // if (mb_strlen($message) >= 2 && mb_strlen($message) <= 200) {
-        //     //     try {
-        //     //         $stmt = $dbh->prepare ("INSERT INTO UserPostMessage (
-        //     //         idUserPostMessage, message, idUserSender, idUserReceiver, idPost, createdTimeMessage) 
-        //     //         VALUES (
-        //     //             null, :message, :idUserSender, :idUserReceiver, :postID , '$currentDate') 
-        //     //         ");
-        
-        //     //     $stmt->execute([':message' => $message, ':idUserSender' => $_SESSION['id'], ':idUserReceiver' => $idReceiver, ':postID' => $idPost]);
-        //     //     } 
-        //     //     catch (PDOException $e) {
-        //     //     }
-        //     //     header('Location: /conversation.php?post='$idPost'&person='$idReceiver'');
-        //     //     exit();
-        //     // }
-        //     // header('Location: /conversation.php?post='$idPost'&person='$idReceiver'');
-        //     // exit();
-
-        //     if (mb_strlen($message) >= 2 && mb_strlen($message) <= 200) {
-        //         try {
-        //             $stmt = $dbh->prepare ("INSERT INTO UserPostMessage (
-        //             idUserPostMessage, message, idUserSender, idUserReceiver, idPost, createdTimeMessage) 
-        //             VALUES (
-        //                 null, :message, :idUserSender, :idUserReceiver, :postID , '$currentDate') 
-        //             ");
-    
-        //         $stmt->execute([':message' => $message, ':idUserSender' => $_SESSION['id'], ':idUserReceiver' => $idReceiver, ':postID' => $idPost]);
-        //         } 
-        //         catch (PDOException $e) {
-        //         }
-        //         header('Location: /conversation.php?post='$idPost'&person='$idReceiver'');
-        //         print_r("powrót");
-        //         exit();
-        //     }
-        // }
         echo $twig->render('conversation.html.twig', ['data' => $date, 'session' => $_SESSION, 'messages' => $messages, 'otherUserLogin' => $otherUserLogin, 'idPost' => $idPost, 'idOtherUser' => $idOtherUser]);
 
     } else {

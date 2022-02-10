@@ -44,7 +44,7 @@
                 $stmt_1->execute();
                 $idReceiver = intval($stmt_1->fetchColumn());
                 
-                if (mb_strlen($message) >= 2 && mb_strlen($message) <= 200) {
+                if (mb_strlen($message) >= 2 && mb_strlen($message) <= 2000) {
                     try {
                         $stmt = $dbh->prepare ("INSERT INTO UserPostMessage (
                         idUserPostMessage, message, idUserSender, idUserReceiver, idPost, createdTimeMessage) 

@@ -237,7 +237,7 @@
 							<strong class="d-block">{{post.localization}}</strong>							
 						</div>
                         <div class="d-flex flex-column pb-3 pl-3">		
-                            <strong class="d-block">{{post.name.categoryName}}</strong>									
+                            <strong class="d-block" style="color: #9932CC">{{post.name.categoryName}}</strong>									
 						</div>
                         {% if session.id is defined %}
                             <form action= "/index.php?message={{post.idPost}}" enctype="multipart/form-data" method="POST">

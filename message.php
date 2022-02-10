@@ -4,6 +4,7 @@
 
     if(isset($_SESSION['id'])) {   
 
+        $idOtherUser = 0;
         $conversations = [];
         $stmt = $dbh->prepare("SELECT DISTINCT (idPost), idUserSender , idUserReceiver FROM UserPostMessage WHERE idUserSender = :idUserSender OR idUserReceiver = :idUserReceiver");
         $stmt->execute([':idUserSender' => $_SESSION['id'], ':idUserReceiver' => $_SESSION['id']]);
@@ -15,9 +16,12 @@
             $stmt_1 = $dbh->prepare("SELECT login FROM Users WHERE idUser = :idUser");
             if ($_SESSION['id'] == intval($row['idUserSender'])) {
                 $stmt_1->execute([':idUser' => $row['idUserReceiver']]);
+                $idOtherUser = $row['idUserReceiver'] ;
             } else {
                 $stmt_1->execute([':idUser' => $row['idUserSender']]);
+                $idOtherUser = $row['idUserSender'];
             }
+            $row['idOtherUser'] = $idOtherUser;
             $row['otherUserName'] = $stmt_1->fetchColumn();
             $conversations[] = $row;
         }

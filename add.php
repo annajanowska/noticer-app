@@ -7,23 +7,10 @@
     $categoriesNames = [];
     $stmt = $dbh->prepare("SELECT DISTINCT categoryName FROM Categories");
     $stmt->execute();
-    //$test = "test";
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $categoriesNames[] = $row;
     }
-    //print_r($categoriesNames);
-
-   // print_r($_POST['nameCat']);
-   /* if ($_POST['nameCat']) {
-        $query = "SELECT subcategoryName FROM Categories WHERE categoryName=".$_POST['nameCat'];
-        $result = $db=>query($query);
-        if ($result->num_rows >0) {
-            while($row = $result->fetch_assoc()) {
-                print_r($row);
-            }
-        }
-    } */
 
     if(empty($_POST))
     {
@@ -68,8 +55,6 @@
             $title = $_POST['title'];
             $price = $_POST['price'];
             $category = $_POST['category'];
-            // print_r($category);
-            //$subcategory = $_POST['subcategory'];
             $description = $_POST['description'];
             $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';
             $domain = $protocol . $_SERVER['SERVER_NAME'];

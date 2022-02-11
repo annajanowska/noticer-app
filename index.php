@@ -64,35 +64,6 @@
     	$last_post = $stmt->fetch(PDO::FETCH_ASSOC);
 	}
 
-	// if(isset($_GET['like']) && isset($_SESSION['id'])){
-
-	// 		$id = intval($_GET['like']);
-
-	// 		$stmt = $dbh->prepare("SELECT COUNT(*) FROM a30_User_Post_Like WHERE userID = :userID AND PostID = :PostID");
-	// 		$stmt->execute([':userID' => $_SESSION['id'], ':PostID' => $id]);
-	// 		$how_many_likes = intval($stmt->fetchColumn());	
-	
-	// 		if ($how_many_likes == 0) {
-	// 			try {
-	// 				$stmt = $dbh->prepare ("INSERT INTO a30_User_Post_Like (
-	// 				id, userID, PostID) 
-	// 				VALUES (
-	// 					null, :userID, :PostID) 
-	// 				");
-	
-	// 			$stmt->execute([':userID' => $_SESSION['id'], ':PostID' => $id]);
-	// 			} 
-	// 			catch (PDOException $e) {
-	// 			}
-	// 			$userFeedback = "Lubisz zdjęcie!";
-	// 			header('Location: /main');
-	// 			exit();
-	// 		}
-	// 		else {
-	// 			header('Location: /main');
-	// 			exit();
-	// 		}
-	// }
 	
 	if (isset($_GET['message']) && isset($_SESSION['id']) && isset($_POST['message']) ) {
 
@@ -103,7 +74,7 @@
 		$stmt_1->execute();
 		$idReceiver = intval($stmt_1->fetchColumn());
 		
-		if (mb_strlen($message) >= 2 && mb_strlen($message) <= 200) {
+		if (mb_strlen($message) >= 2 && mb_strlen($message) <= 2000) {
 			try {
 				$stmt = $dbh->prepare ("INSERT INTO UserPostMessage (
 				idUserPostMessage, message, idUserSender, idUserReceiver, idPost, createdTimeMessage) 

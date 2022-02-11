@@ -13,10 +13,6 @@
                 </div>
                 <div class="list-group">
                     {% for conversation in conversations %}
-                    {# "/index.php?message={{post.idPost}}"
-                    index.php?page=nazwa_strony&edit=id #}
-                    {# $url = "http://localhost/main.php?email=$email_address&event_id=$event_id"; #}
-                    {# "/conversation.php?title={{conversation.postTitle}}&otherName={{conversation.otherUserName}}" #}
                         <a href="/conversation.php?post={{conversation.idPost}}&person={{conversation.buyer}}" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                                 <h5 class="mb-1">{{conversation.postTitle}}</h5>

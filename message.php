@@ -28,7 +28,7 @@
             $conversations[] = $row;
         }
 
-        echo $twig->render('message.html.twig', ['data' => $date, 'session' => $_SESSION, 'conversations' => $conversations]);
+        echo $twig->render('message.html.twig', ['data' => $date, 'session' => $_SESSION, 'conversations' => $conversations, 'categoriesNames' => $categoriesNames]);
     }
     else {
         header("Location:https://s401354.labagh.pl/main");

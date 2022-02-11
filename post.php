@@ -89,7 +89,7 @@
             }
 
         }
-            echo $twig->render('post.html.twig', ['data' => $date, 'post' => $_POST, 'get' => $_GET, 'session' => $_SESSION, 'post' => $post, 'user' => $user, 'how_many_photos' => $how_many_photos, 'last_post' => $last_post, 'owner' => $owner ]);
+            echo $twig->render('post.html.twig', ['data' => $date, 'post' => $_POST, 'get' => $_GET, 'session' => $_SESSION, 'post' => $post, 'user' => $user, 'how_many_photos' => $how_many_photos, 'last_post' => $last_post, 'owner' => $owner, 'categoriesNames' => $categoriesNames]);
     }
     else {
         header("Location:https://s401354.labagh.pl/main");

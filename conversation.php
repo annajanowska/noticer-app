@@ -6,6 +6,7 @@
     if (isset($_SESSION['id'])) {
 
         if (isset($_GET['post']) && isset($_GET['person'])) {
+
             $idPost = $_GET['post'];
             $idOtherUser = $_GET['person'];
     
@@ -24,13 +25,15 @@
                 $messages[] = $row;
             }
         } else {
-            if (isset($_GET['message']) && isset($_GET['post']) && isset($_POST['message']) ) {
+
+            if (isset($_GET['message']) && isset($_GET['post']) && isset($_POST['message'])) {
 
                 $idPost =intval($_GET['post']);
                 $idReceiver = intval($_GET['message']);
                 $message = $_POST['message'];
                 
                 if (mb_strlen($message) >= 2 && mb_strlen($message) <= 200) {
+                    
                     try {
                         $stmt = $dbh->prepare ("INSERT INTO UserPostMessage (
                         idUserPostMessage, message, idUserSender, idUserReceiver, idPost, createdTimeMessage) 
@@ -43,12 +46,6 @@
                     catch (PDOException $e) {
                     }
 
-<<<<<<< HEAD
-                    //header('Location: /conversation.php?post='$idPost'&person='$idReceiver'');
-                    //print_r("powrót");
-                    //exit();
-=======
->>>>>>> origin/devel-Ania
                 }
         
                 $stmt_1 = $dbh->prepare("SELECT login FROM Users WHERE idUser = $idReceiver");
@@ -70,7 +67,7 @@
 
             }
         }
-        echo $twig->render('conversation.html.twig', ['data' => $date, 'session' => $_SESSION, 'messages' => $messages, 'otherUserLogin' => $otherUserLogin, 'idPost' => $idPost, 'idOtherUser' => $idOtherUser]);
+        echo $twig->render('conversation.html.twig', ['data' => $date, 'session' => $_SESSION, 'messages' => $messages, 'otherUserLogin' => $otherUserLogin, 'idPost' => $idPost, 'idOtherUser' => $idOtherUser, 'categoriesNames' => $categoriesNames]);
 
     } else {
         header("Location:https://s401354.labagh.pl/main");

@@ -92,4 +92,4 @@
 		}	
 	}
 
-	echo $twig->render('index.html.twig', ['data' => $date, 'session' => $_SESSION, 'test' => $userFeedback, 'posts' => $posts, 'ile_photos' => $ile_photos, 'last_post' => $last_post, 'comment'=> $comment]);
+	echo $twig->render('index.html.twig', ['data' => $date, 'session' => $_SESSION, 'test' => $userFeedback, 'posts' => $posts, 'ile_photos' => $ile_photos, 'last_post' => $last_post, 'comment'=> $comment, 'categoriesNames' => $categoriesNames]);

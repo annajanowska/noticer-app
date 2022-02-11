@@ -40,10 +40,10 @@
             if(isset($_POST['delete']))
             {
                 print_r('You clicked');
-                echo $twig->render('profile.html.twig', ['post' => $_POST, 'user' =>$user, 'get' => $_GET, 'session' => $_SESSION, 'my_posts' => $my_posts, 'how_many_photos' => $how_many_photos, 'last_post' => $last_post, 'data' => $date]);
+                echo $twig->render('profile.html.twig', ['post' => $_POST, 'user' =>$user, 'get' => $_GET, 'session' => $_SESSION, 'my_posts' => $my_posts, 'how_many_photos' => $how_many_photos, 'last_post' => $last_post, 'data' => $date, 'categoriesNames' => $categoriesNames]);
             }
 
-            echo $twig->render('profile.html.twig', ['post' => $_POST, 'user' =>$user, 'get' => $_GET, 'session' => $_SESSION, 'my_posts' => $my_posts, 'how_many_photos' => $how_many_photos, 'last_post' => $last_post, 'data' => $date]);
+            echo $twig->render('profile.html.twig', ['post' => $_POST, 'user' =>$user, 'get' => $_GET, 'session' => $_SESSION, 'my_posts' => $my_posts, 'how_many_photos' => $how_many_photos, 'last_post' => $last_post, 'data' => $date, 'categoriesNames' => $categoriesNames]);
         }
         
     }

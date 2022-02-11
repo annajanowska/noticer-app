@@ -56,12 +56,10 @@
         $category = $_GET['category'];
     }
 
-
 		$stmt_howmuch = $dbh->prepare("SELECT COUNT(*) FROM Posts p INNER JOIN Users u ON p.idUser = u.idUser WHERE idCategory = 
 			(SELECT idCategory FROM Categories WHERE categoryName = '$category')");
 		$stmt_howmuch->execute();
 		$how_many_post = intval($stmt_howmuch->fetchColumn());	
-
 
 		if ($how_many_post == 0) {
 			$posts = [];
@@ -81,4 +79,4 @@
 					}
 		}
 
-    echo $twig->render('search.html.twig', ['data' => $date, 'session' => $_SESSION, 'test' => $userFeedback, 'posts' => $posts, 'ile_photos' => $ile_photos, 'last_post' => $last_post, 'comment'=> $comment, 'category' => $category, 'how_many_post' => $how_many_post]);
+    echo $twig->render('search.html.twig', ['data' => $date, 'session' => $_SESSION, 'test' => $userFeedback, 'posts' => $posts, 'ile_photos' => $ile_photos, 'last_post' => $last_post, 'comment'=> $comment, 'category' => $category, 'how_many_post' => $how_many_post, 'categoriesNames' => $categoriesNames]);

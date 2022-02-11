@@ -32,3 +32,11 @@
     } else {
         exit("Nie znaleziono konfiguracji bazy danych.");
     }
+
+    $categoriesNames = [];
+    $stmt = $dbh->prepare("SELECT DISTINCT categoryName FROM Categories");
+    $stmt->execute();
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $categoriesNames[] = $row;
+    }

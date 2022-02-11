@@ -164,14 +164,22 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div class="container justify-content-center">
 				<a class="navbar-brand" href="/main">Noticer</a>
-                <div class="d-flex flex-row justify-content-between align-items-center col-9">
-                    <div>
-                        <form action="/search.php" method="GET" class="form-inline my-2 my-lg-0 ml-5">
-                            <input class="form-control mr-sm-2 search" type="search" name="category" placeholder="Wyszukaj kategorię" aria-label="Search">
-                        </form>
-                    </div>
+                <div class="d-flex flex-row justify-content-between align-items-center col-10">
+
                     <div class="d-flex flex-row">
                         <ul class="list-inline m-0">
+
+                            <li class="list-inline-item">
+                                <form action="/search.php" method="GET" class="form-inline">
+							        <select class="form-control" type="text" name="category" id= "slct1" placeholder="Kategoria">
+							            {% for name in categoriesNames %}
+							 	            <option value="{{name.categoryName}}">{{name.categoryName}}</option>
+							            {% endfor %}
+							        </select>
+                                    <button type="submit" name="submit" class="btn btn-outline-primary mx-3">Wyszukaj kategorię</button>
+                                </form>
+                           </li>
+
 						   	{% if session.id is defined %}
                             <li class="list-inline-item ml-2">
                                 <a class="nav-link" href="/message">Wiadomości</a>

@@ -10,7 +10,7 @@
           $userFeedback = "Invalid data.";
 
     if (empty($_POST)) {
-        echo $twig->render('register.html.twig', [ 'klucz' => $config['recaptcha_public'], 'data' => $date]);
+        echo $twig->render('register.html.twig', [ 'klucz' => $config['recaptcha_public'], 'data' => $date, 'categoriesNames' => $categoriesNames]);
     }
     else {
         
@@ -49,10 +49,10 @@
                 $userFeedback = "Nieprawidłowe dane.";
             }
 
-            echo $twig->render('register.html.twig', [ 'test' => $userFeedback, 'klucz' => $config['recaptcha_public'], 'data' => $date]);
+            echo $twig->render('register.html.twig', [ 'test' => $userFeedback, 'klucz' => $config['recaptcha_public'], 'data' => $date, 'categoriesNames' => $categoriesNames]);
         }
         else {
-            echo $twig->render('register.html.twig', [ 'test' => $userFeedback, 'klucz' => $config['recaptcha_public'], 'data' => $date]);
+            echo $twig->render('register.html.twig', [ 'test' => $userFeedback, 'klucz' => $config['recaptcha_public'], 'data' => $date, 'categoriesNames' => $categoriesNames]);
         }
     }
     }

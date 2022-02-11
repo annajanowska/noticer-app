@@ -1,22 +1,12 @@
 <?php
 
-    include("connect.php");
+   include("connect.php");
     
-   if(isset($_SESSION['id'])){
+   if (isset($_SESSION['id'])) {
 
-    $categoriesNames = [];
-    $stmt = $dbh->prepare("SELECT DISTINCT categoryName FROM Categories");
-    $stmt->execute();
-
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $categoriesNames[] = $row;
-    }
-
-    if(empty($_POST))
-    {
+    if (empty($_POST)) {
         echo $twig->render('add.html.twig',['session' => $_SESSION, 'data' => $date, 'categoriesNames' => $categoriesNames]);
-    }
-    else {          
+    } else {          
         try {
             if (empty($_FILES['image'])) {
                 throw new Exception('Image file is missing');
@@ -61,7 +51,6 @@
             $url = $domain . $path;
             $currentDate = date("Y-m-d H:i:s");
            
-
             $stmt = $dbh->prepare("SELECT * FROM Users WHERE idUser = :id");
             $stmt->execute([':id' => $_SESSION['id']]);
             $userID = $stmt->fetch(PDO::FETCH_ASSOC)['idUser'];
@@ -72,10 +61,9 @@
                 ");
             $stmt = $stmt->execute();
             
-            if ( true) {
+            if (true) {
                 $info = "Dodano ogłoszenie!";
                 echo $twig->render('add.html.twig', ['post' => $_POST, 'session' =>$_SESSION, 'get' => $_GET, 'test'=> $info, 'data' => $date, 'categoriesNames' => $categoriesNames]);
-                
             } else 
                 throw new Exception('Error in saving into the database');
             
@@ -84,8 +72,7 @@
             echo $twig->render('add.html.twig', ['post' => $_POST, 'session' =>$_SESSION, 'get' => $_GET, 'test'=>$info, 'data' => $date, 'categoriesNames' => $categoriesNames]);
         }
     }       
-   }
-   else {
+   } else {
         header("Location:https://s401354.labagh.pl/main");
         exit();
    }

@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-	<title>{% block title %}Tripstagram{% endblock %}</title>
+	<title>{% block title %}Noticer{% endblock %}</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link rel="icon" type="image/png" sizes="16x16"  href="favicon-16x16.png">
@@ -11,6 +11,8 @@
 	<meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
     <style>
 		html {
@@ -19,7 +21,7 @@
         }
         body {
             margin-bottom: 60px;
-			padding-top: 5rem;
+            padding-top: 5rem;
         }
         .footer {
           position: absolute;
@@ -29,75 +31,129 @@
           line-height: 60px;
           background-color: #f5f5f5;
         }
-		.navbar-light .navbar-brand {
-			color: purple;
-		}
-		
-		.navbar-light {
-			background: rgb(250,214,255) !important;
-			background: linear-gradient(90deg, rgba(250,214,255,0.9054972330729166) 0%, rgba(247,228,255,0.9139005944174545) 35%, rgba(227,211,255,0.9110994739692753) 100%) !important;
-		}
-		
-		.search {
-			background: rgb(251,246,255);
-			background: linear-gradient(90deg, rgba(251,246,255,0.919502835313813) 100%, rgba(252,244,255,0.9307073171065301) 100%, rgba(253,247,255,0.9279061966583508) 100%);
-		}
+        .navbar-light .navbar-brand {
+            color: purple;
+        }
+        
+        .navbar-light {
+            background: rgb(82,190,209, 0.3) !important;
+        }
+        
+        .nav-link {
+            color: #96009e;
+        }
 
-		.fixed{
-			position: fixed;
-			width: 23%;
-		}
-		
-		.btn-outline-primary{
-			color: #aa61c2;
-			border-color: #aa61c2;
-		}
-		.btn-outline-primary:hover, 
-		.btn-outline-primary:focus,
-		.btn-outline-primary:active {
-			background: rgb(218,67,237) !important;
-			background: linear-gradient(90deg, rgba(218,67,237,1) 0%, rgba(177,61,227,1) 35%, rgba(100,41,209,1) 100%) !important;
-			color: #FFF;
-			border-color: #bb90d1 !important;
-		}
-		.btn-outline-primary:active,
-		.btn-outline-primary:focus	{
-			box-shadow: 0 0 10px #bb90d1 !important;
-		}
-				
-		.form-control:focus {
-			border-color: #cfc1d6;
-			box-shadow: inset 0 0 2px #cfc1d6, 0 0 5px #cfc1d6;
-		}
-		
-		.btn-outline-secondary{
-			color: #bb90d1;
-			border-color: #bb90d1;
-		}
-		.btn-outline-secondary:hover, 
-		.btn-outline-secondary:focus,
-		.btn-outline-secondary:active {
-			background: rgb(218,67,237) !important;
-			background: linear-gradient(90deg, rgba(218,67,237,0.7486344879748774) 0%, rgba(177,61,227,0.7542367288712359) 35%, rgba(100,41,209,0.7486344879748774) 100%) !important;
-			color: #FFF;
-			border-color: #cfc1d6 !important;
-		}
-		.btn-outline-secondary:active,
-		.btn-outline-secondary:focus	{
-			box-shadow: 0 0 10px #cfc1d6 !important;
-		}
-		
-		.add-photo {
-			color: #bb90d1;
-		}
-		
-		.heart-shadow:focus {
-			box-shadow: inset 0 0 2px #cfc1d6, 0 0 5px #cfc1d6;
-		}
-		.photo-shadow:focus {
-			box-shadow: inset 0 0 2px #bb90d1, 0 0 10px #bb90d1;
-		}
-	
+        .search {
+            background: rgb(251,246,255, 0.7);
+        }
+
+        .fixed{
+            position: fixed;
+            width: 23%;
+        }
+        
+        .btn-outline-primary{
+            color: #aa61c2;
+            border-color: #aa61c2;
+        }
+        .btn-outline-primary:hover, 
+        .btn-outline-primary:focus,
+        .btn-outline-primary:active {
+            background: rgb(216,166,245, 0.7) !important;
+            color: #FFF;
+            border-color: #bb90d1 !important;
+        }
+        .btn-outline-primary:active,
+        .btn-outline-primary:focus    {
+            box-shadow: 0 0 10px #bb90d1 !important;
+        }
+                
+        .form-control:focus {
+            border-color: #cfc1d6;
+            box-shadow: inset 0 0 2px #cfc1d6, 0 0 5px #cfc1d6;
+        }
+        
+        .btn-outline-secondary{
+            color: #bb90d1;
+            border-color: #bb90d1;
+        }
+        .btn-outline-secondary:hover, 
+        .btn-outline-secondary:focus,
+        .btn-outline-secondary:active {
+            background: rgb(216,166,245, 0.7) !important;
+            color: #FFF;
+            border-color: #cfc1d6 !important;
+        }
+        .btn-outline-secondary:active,
+        .btn-outline-secondary:focus    {
+            box-shadow: 0 0 10px #cfc1d6 !important;
+        }
+        
+        .add-photo {
+            color: #bb90d1;
+        }
+        
+        .heart-shadow:focus {
+            box-shadow: inset 0 0 2px #cfc1d6, 0 0 5px #cfc1d6;
+        }
+        .photo-shadow:focus {
+            box-shadow: inset 0 0 2px #bb90d1, 0 0 10px #bb90d1;
+        }
+
+        {# * {
+            font-family: 'Georgia';
+        } #}
+        .scroll{
+            height: 500px;
+            overflow: auto;  
+        }
+        .bubbleWrapper {
+	        padding: 10px 10px;
+	        display: flex;
+	        justify-content: flex-end;
+	        flex-direction: column;
+	        align-self: flex-end;
+            color: #fff;
+        }
+        .inlineContainer {
+            display: inline-flex;
+        }
+        .inlineContainer.own {
+            flex-direction: row-reverse;
+        }
+        .inlineIcon {
+            width:20px;
+            object-fit: contain;
+        }
+        .ownBubble {
+            min-width: 60px;
+            max-width: 700px;
+            padding: 14px 18px;
+            margin: 6px 8px;
+            background-color: #5b5377;
+            border-radius: 16px 16px 0 16px;
+            border: 1px solid #443f56;
+        }
+        .otherBubble {
+            min-width: 60px;
+            max-width: 700px;
+            padding: 14px 18px;
+            margin: 6px 8px;
+            background-color: #6C8EA4;
+            border-radius: 16px 16px 16px 0;
+            border: 1px solid #54788e;
+        }
+        .own {
+            align-self: flex-end;
+        }
+        .other {
+            align-self: flex-start;
+        }
+        span.own,
+        span.other{
+            font-size: 14px;
+            color: grey;
+        }
     </style>
 </head>
 
@@ -107,25 +163,36 @@
 	<div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div class="container justify-content-center">
-				<a class="navbar-brand" href="/main">Tripstagram</a>
-                <div class="d-flex flex-row justify-content-between align-items-center col-9">
-                    <div>
-                        <form action="/search.php" method="GET" class="form-inline my-2 my-lg-0 ml-5">
-                            <input class="form-control mr-sm-2 search" type="search" name="localization" placeholder="Wyszukaj miejsce" aria-label="Search">
-                        </form>
-                    </div>
+				<a class="navbar-brand" href="/main">Noticer</a>
+                <div class="d-flex flex-row-reverse justify-content-between align-items-center col-10">
+
                     <div class="d-flex flex-row">
                         <ul class="list-inline m-0">
+
+                            <li class="list-inline-item">
+                                <form action="/search.php" method="GET" class="form-inline">
+							        <select class="form-control" type="text" name="category" id= "slct1" placeholder="Kategoria">
+							            {% for name in categoriesNames %}
+							 	            <option value="{{name.categoryName}}">{{name.categoryName}}</option>
+							            {% endfor %}
+							        </select>
+                                    <button type="submit" name="submit" class="btn btn-outline-primary mx-3">Wyszukaj kategorię</button>
+                                </form>
+                           </li>
+
 						   	{% if session.id is defined %}
                             <li class="list-inline-item ml-2">
-                                <a class="nav-link" style="color: #96009e" href="/add">Dodaj</a>
+                                <a class="nav-link" href="/message">Wiadomości</a>
+                            </li>                               
+                            <li class="list-inline-item ml-2">
+                                <a class="nav-link" href="/add">Dodaj ogłoszenie</a>
                             </li>
                             <li class="list-inline-item ml-2">
-                                <a class="nav-link" style="color: #96009e" href="/profile/{{session.login}}">Twój Profil</a>
+                                <a class="nav-link" href="/profile/{{session.login}}">Twój Profil</a>
                             </li>                            	
                         	{% else %}
                             <li class="list-inline-item">
-                                <a class="nav-link" style="color: #96009e" href="/register">Rejestracja</a>
+                                <a class="nav-link" href="/register">Rejestracja</a>
                             </li>                            	
                         	{% endif %}
                         </ul>
@@ -162,57 +229,37 @@
                         </div>
                         <div class="d-flex flex-row justify-content-between p-3">
 							<div>
-							<strong>Liczba polubień: </strong>
-							<strong>{{post.likes}}</strong>
+								<div>
+                                {% if post.isSold == 0 %}
+                                    <strong style="color: #96009e">Aktualne</strong>
+                                {% else %}
+                                    <strong style="color: #96009e">Nieaktualne</strong>
+                                {% endif %}
+								</div>
+							<strong style="font-size:120%">{{post.title}}</strong>
 							</div>
-							{% if session.id is defined %}
-							<a href="/main/like/{{post.id}}">
-							<button class="btn p-0 heart-shadow">
-                                <svg width="1.6em" height="1.6em" viewBox="0 0 16 16"
-                                    class="bi bi-heart" fill="currentColor"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                </svg>
-                            </button>
-                            </a>	                                
-                            {% else %}
-                            <button class="btn p-0" disabled>
-                                <svg width="1.6em" height="1.6em" viewBox="0 0 16 16"
-                                    class="bi bi-heart" fill="currentColor"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-                                </svg>
-                            </button>
-                            {% endif %}
+                             <span class="font-weight-bold" style="color: black; font-size: 150%"> {{post.price}} zł</span>
                         </div>
-						<div class="px-3 pb-3">
-							<strong style="color: purple">{{post.localization}}</strong>
+						<div class="d-flex flex-column pb-3 pl-3">		
+							<p>{{post.description}}</p>				
+							<strong class="d-block">{{post.localization}}</strong>							
 						</div>
-						<div class="d-flex flex-column pb-3 pl-3">						
-							<strong class="d-block">{{post.login}}</strong>
-							<p>{{post.description}}</p>	
-                            {% for comment in post.comments %}						
-							<div class="pb-2">
-								<strong class="d-block">{{comment.login}}</strong>
-                                <span>{{comment.comment}}</span>
-							</div>							
-							{% endfor %}							
+                        <div class="d-flex flex-column pb-3 pl-3">		
+                            <strong class="d-block" style="color: #9932CC">{{post.name.categoryName}}</strong>									
 						</div>
-                         {% if session.id is defined %}
-                        <form action= "/index.php?comments={{post.id}}" enctype="multipart/form-data" method="POST">
-						<div class="d-flex flex-row mr-3 mb-3">
-							<div class="col-10">
-								<input class="form-control" type="text" name="comment" placeholder="Dodaj komentarz">
-							</div>
-							<div class="col-2 pl-3">
-								<button type="submit" name="" class="btn btn-outline-primary">Dodaj</button>
-                                <div>{{info}}</div>
-							</div>
-						</div>
-                        </form>
-                       {% endif %}
+                        {% if session.id is defined %}
+                            <form action= "/index.php?message={{post.idPost}}" enctype="multipart/form-data" method="POST">
+						    <div class="d-flex flex-row mr-3 mb-3">
+							    <div class="col-10">
+								    <input class="form-control" type="text" name="message" placeholder="Wyślij wiadomość do {{post.login}}">
+							    </div>
+							    <div class="col-2 pl-3">
+								    <button type="submit" name="" class="btn btn-outline-primary">Dodaj</button>
+                                    <div>{{info}}</div>
+							    </div>
+						    </div>
+                            </form>
+                        {% endif %}
                     </div>
                 </div>	
     		{% endfor %}
@@ -231,9 +278,9 @@
 					<div class="card-body">
                         {% if session.id is defined %}
                             <strong style="color: #761b7a;">{{session.login}}</strong><br>
-							<span class="pr-1">Liczba postów: </span>
+							<span class="pr-1">Liczba dodanych ogłoszeń: </span>
 							<span>{{ile_photos}}</span><br>
-							<span class="pr-1">Ostatni post: </span>
+							<span class="pr-1">Ostatnie ogłoszenie: </span>
 
                             {% if ile_photos  == 0 %}
 				                <span>-</span><br>
@@ -274,10 +321,10 @@
 			<div class="row justify-content-between">
 				<span style="color: #cfc1d6">Aktualna data: {{data}}</span>
 				<div>
-					<span style="color: #cfc1d6">© 2021 Copyright: </span>
-					<span style="color: #bb90d1">Tripstagram</span>
+					<span style="color: #cfc1d6">© 2022 Copyright: </span>
+					<span style="color: #bb90d1">Noticer</span>
 				</div>
-				<span style="color: #cfc1d6">Ania Janowska, Marianna Kubsik, Ola Kijanka</span>
+				<span style="color: #cfc1d6">Ania Janowska, Marianna Kubsik</span>
 			</div>
           </div>
         </footer>

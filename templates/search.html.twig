@@ -8,7 +8,7 @@
 	    <div class="row justify-content-md-center">
 		
             <div class="col-md-auto">
-			{% if how_many_post != "0" %}
+
     		{% for post in posts %}
 				<div class="card mb-5" style="width: 36rem;">                               
 					<div class="card-header p-3">
@@ -22,32 +22,62 @@
                         <div class="embed-responsive embed-responsive-1by1">
                             <img class="embed-responsive-item" style="object-fit: cover;" src={{post.imgSource}} />
                         </div>
-                        <div class="d-flex flex-row justify-content-between p-3">	
-						<div>
+                        <div class="d-flex flex-row justify-content-between p-3">
 							<div>
-								{% if post.isSold == 0 %}
-                                    <strong style="color: #96009e">Aktualne</strong>
-                                {% else %}
-                                    <strong style="color: #96009e">Nieaktualne</strong>
-                                {% endif %}
+							<strong>Liczba polubień: </strong>
+							<strong>{{post.likes}}</strong>
 							</div>
-							<strong style="font-size:120%">{{post.title}}</strong>
-							</div>
-                             <span class="font-weight-bold" style="color: black; font-size: 150%"> {{post.price}} zł</span>
+							{% if session.id is defined %}
+							<a href="/search.php?lajk={{post.id}}&miejsce={{post.localization}}">
+							<button class="btn p-0 heart-shadow">
+                                <svg width="1.6em" height="1.6em" viewBox="0 0 16 16"
+                                    class="bi bi-heart" fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                </svg>
+                            </button>
+                            </a>	                                
+                            {% else %}
+                            <button class="btn p-0" disabled>
+                                <svg width="1.6em" height="1.6em" viewBox="0 0 16 16"
+                                    class="bi bi-heart" fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
+                                </svg>
+                            </button>
+                            {% endif %}
                         </div>
-						<div class="d-flex flex-column pb-3 pl-3">		
-							<p>{{post.description}}</p>				
-							<strong class="d-block">{{post.localization}}</strong>							
+						<div class="px-3 pb-3">
+							<strong style="color: purple">{{post.localization}}</strong>
 						</div>
-                        <div class="d-flex flex-column pb-3 pl-3">		
-                            <strong class="d-block" style="color: #9932CC">{{post.name.categoryName}}</strong>									
-						</div>				
+						<div class="d-flex flex-column pb-3 pl-3">						
+							<strong class="d-block">{{post.login}}</strong>
+							<p>{{post.description}}</p>	
+                            {% for comment in post.comments %}						
+							<div class="pb-2">
+								<strong class="d-block">{{comment.login}}</strong>
+                                <span>{{comment.comment}}</span>
+							</div>							
+							{% endfor %}							
+						</div>
+                        {% if session.id is defined %}
+                        <form action= "/search.php?koment={{post.id}}&miejsce={{post.localization}}" enctype="multipart/form-data" method="POST">
+						<div class="d-flex flex-row mr-3 mb-3">
+							<div class="col-10">
+								<input class="form-control" type="text" name="commentss" placeholder="Dodaj komentarz">
+							</div>
+							<div class="col-2 pl-3">
+								<button type="submit" name="" class="btn btn-outline-primary">Dodaj</button>
+                                <div>{{info}}</div>
+							</div>
+						</div>
+                        </form>
+                       {% endif %}
                     </div>
                 </div>	
     		{% endfor %}
-			{% else %}
-			<strong style="font-size: 120%">Nie ma ogłoszeń z podanej kategorii!</strong>
-			{% endif %}
             </div>
 			
 
@@ -63,9 +93,9 @@
 					<div class="card-body">
                         {% if session.id is defined %}
                             <strong style="color: #761b7a">{{session.login}}</strong><br>
-							<span class="pr-1">Liczba dodanych ogłoszeń: </span>
+							<span class="pr-1">Liczba postów: </span>
 							<span>{{ile_photos}}</span><br>
-							<span class="pr-1">Ostatnie ogłoszenie: </span>
+							<span class="pr-1">Ostatni post: </span>
 
                             {% if ile_photos  == 0 %}
 				                <span>-</span><br>

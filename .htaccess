@@ -1,0 +1,9 @@
+RewriteEngine On
+RewriteRule main/localization index.php?localization [NC,L,QSA]
+RewriteRule ^post/show/([0-9]+)$ post.php?show=$1 [NC,L,QSA]
+RewriteRule ^main/like/([0-9]+)$ index.php?like=$1 [NC,L,QSA]
+RewriteRule ^main/comments/([0-9]+)$ index.php?like=$1 [NC,L,QSA]
+RewriteRule main index.php?page=$1 [NC,L,QSA]
+RewriteRule register register.php?page=$1 [NC,L,QSA]
+RewriteRule add add.php?page=$1 [NC,L,QSA]
+RewriteRule profile profile.php?page=$1 [NC,L,QSA]

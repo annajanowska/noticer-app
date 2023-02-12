@@ -1,6 +1,6 @@
 # Noticer application <img src="https://user-images.githubusercontent.com/56201394/217075383-7039f8e1-dbfd-4bda-bc9f-97ac05387633.png" width="30" height="30"> <img src="https://user-images.githubusercontent.com/56201394/217075539-15c19fc5-c00a-40b2-90b5-b1ece7a66f7e.png" width="30" height="30"> <img src="https://user-images.githubusercontent.com/56201394/217075615-8c8e4131-9e55-4330-a0fc-6aa6e95975b1.png" width="30" height="30">
 
-The system works as Olx. You can add products and services that contain photos, localization, description, and price. The application allows you to comment on ads, and also gives you the ability to search for the item in a given category. In addition, you can contact the advertiser personally to talk and negotiate the offer.
+A web application that serves as a shopping platform. You can add products and services that contain photos, localization, description, and price. The application allows you to comment on ads, and also gives you the ability to search for the item in a given category. In addition, you can contact the advertiser personally to talk and negotiate the offer.
 
 ![image](https://user-images.githubusercontent.com/56201394/217079857-c54d6856-7929-405f-a31d-87025d0e0dd8.png)
 ![image](https://user-images.githubusercontent.com/56201394/217079997-c95b8df9-feda-4019-86f2-a0d63fd250ef.png)
